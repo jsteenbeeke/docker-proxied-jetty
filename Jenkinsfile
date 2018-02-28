@@ -10,10 +10,14 @@ pipeline {
 
 	stages {
 		stage('Build') {
-			sh 'docker build -t registry.jeroensteenbeeke.nl/proxied-jetty:latest .' 
+			steps {
+				sh 'docker build -t registry.jeroensteenbeeke.nl/proxied-jetty:latest .'
+			} 
 		}
 		stage('Push') {
-			sh 'docker push registry.jeroensteenbeeke.nl/proxied-jetty:latest'
+			steps {
+				sh 'docker push registry.jeroensteenbeeke.nl/proxied-jetty:latest'
+			}
 		}
 	}
 }

@@ -9,6 +9,11 @@ pipeline {
 	}
 
 	stages {
+		stage('Prepare') {
+			steps {
+				sh 'docker pull jetty:alpine'
+			}
+		}
 		stage('Build') {
 			steps {
 				sh 'docker build -t registry.jeroensteenbeeke.nl/proxied-jetty:latest .'

@@ -11,7 +11,7 @@ pipeline {
 	stages {
 		stage('Prepare') {
 			steps {
-				sh 'docker pull jetty:alpine'
+				sh 'docker pull jetty:9-jre11'
 			}
 		}
 		stage('Build') {

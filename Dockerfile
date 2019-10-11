@@ -1,4 +1,4 @@
-FROM jetty:9-jre11
+FROM registry.jeroensteenbeeke.nl/jetty:9-jre11
 
 USER root
 RUN apt-get update && \

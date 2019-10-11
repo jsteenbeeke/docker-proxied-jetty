@@ -8,6 +8,11 @@ pipeline {
 		disableConcurrentBuilds()
 	}
 
+	triggers {
+		pollSCM('H/30 * * * *')
+		upstream (upstreamProjects: 'docker-jetty', threshold: hudson.model.Result.SUCCESS)
+	}
+
 	stages {
 		stage('Prepare') {
 			steps {

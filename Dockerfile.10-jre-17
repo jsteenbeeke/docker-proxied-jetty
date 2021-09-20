@@ -1,4 +1,4 @@
-FROM registry.jeroensteenbeeke.nl/jetty:9-jre11
+FROM registry.jeroensteenbeeke.nl/jetty:10.0.6-jdk17-slim 
 
 USER root
 RUN apt-get update && \

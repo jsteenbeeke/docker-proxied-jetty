@@ -10,14 +10,13 @@ pipeline {
 
 	triggers {
 		pollSCM('H/30 * * * *')
-		upstream (upstreamProjects: 'docker-jetty', threshold: hudson.model.Result.SUCCESS)
 	}
 
 	stages {
 		stage('Prepare') {
 			steps {
 				sh 'docker pull registry.jeroensteenbeeke.nl/jetty:9-jre11'
-				sh 'docker pull registry.jeroensteenbeeke.nl/jetty:10-jre11'
+				sh 'docker pull jetty:11.0.6-jdk11-slim'
 			}
 		}
 		stage('Build') {

@@ -1,7 +1,7 @@
-FROM jetty:10.0.6-jdk11-slim 
+FROM registry.jeroensteenbeeke.nl/jetty:10.0-jdk17 
 
 USER root
-RUN apt-get update && \
+RUN	apt-get update && \
 	apt-get install -y xmlstarlet && \
 	/usr/bin/xmlstarlet ed --subnode "/Configure/New[@id='httpConfig']" --type elem -n Call -v "" $JETTY_HOME/etc/jetty.xml | \
 	/usr/bin/xmlstarlet ed --insert "/Configure/New[@id='httpConfig']/Call" --type attr -n "name" -v "addCustomizer" | \

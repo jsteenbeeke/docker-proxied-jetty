@@ -15,20 +15,20 @@ pipeline {
 	stages {
 		stage('Prepare') {
 			steps {
-				sh 'docker pull jetty:10.0.6-jdk11-slim'
-				sh 'docker pull registry.jeroensteenbeeke.nl/jetty:10.0.6-jdk17-slim'
+				sh 'docker pull registry.jeroensteenbeeke.nl/jetty:10.0-jdk17'
+				sh 'docker pull registry.jeroensteenbeeke.nl/jetty:10.0-jdk19'
 			}
 		}
 		stage('Build') {
 			steps {
-				sh 'docker build -f Dockerfile.10-jre-11 -t registry.jeroensteenbeeke.nl/proxied-jetty:10-latest .'
-				sh 'docker build -f Dockerfile.10-jre-17 -t registry.jeroensteenbeeke.nl/proxied-jetty:10-jdk17 .'
+				sh 'docker build -f Dockerfile.10-jdk-17 -t registry.jeroensteenbeeke.nl/proxied-jetty:10-jdk17 .'
+				sh 'docker build -f Dockerfile.10-jdk-19 -t registry.jeroensteenbeeke.nl/proxied-jetty:10-jdk19 .'
 			} 
 		}
 		stage('Push') {
 			steps {
-				sh 'docker push registry.jeroensteenbeeke.nl/proxied-jetty:10-latest'
 				sh 'docker push registry.jeroensteenbeeke.nl/proxied-jetty:10-jdk17'
+				sh 'docker push registry.jeroensteenbeeke.nl/proxied-jetty:10-jdk19'
 			}
 		}
 	}

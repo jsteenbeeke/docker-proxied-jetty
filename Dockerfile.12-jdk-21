@@ -1,4 +1,4 @@
-FROM registry.jeroensteenbeeke.nl/jetty:10.0-jdk20 
+FROM registry.jeroensteenbeeke.nl/jetty:latest
 
 USER root
 RUN	apt-get update && \

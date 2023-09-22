@@ -8,8 +8,6 @@ RUN	apk add --no-cache xmlstarlet && \
 	/usr/bin/xmlstarlet ed --subnode "/Configure/New[@id='httpConfig']/Call/Arg" --type elem -n "New" -v "" | \
 	/usr/bin/xmlstarlet ed --insert "/Configure/New[@id='httpConfig']/Call/Arg/New" --type attr -n "class" -v "org.eclipse.jetty.server.ForwardedRequestCustomizer" \
 	> $JETTY_HOME/etc/jetty-new.xml && \
-	mv $JETTY_HOME/etc/jetty-new.xml $JETTY_HOME/etc/jetty.xml && \
-	apt-get purge xmlstarlet -y && \
-	apt-get clean -y
+	mv $JETTY_HOME/etc/jetty-new.xml $JETTY_HOME/etc/jetty.xml
 	
 USER jetty

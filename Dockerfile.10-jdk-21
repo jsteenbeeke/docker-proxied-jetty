@@ -1,8 +1,7 @@
 FROM registry.jeroensteenbeeke.nl/jetty:10.0-latest 
 
 USER root
-RUN	yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-	yum -y install xmlstarlet && \
+RUN	apk add --no-cache xmlstarlet && \
 	/usr/bin/xmlstarlet ed --subnode "/Configure/New[@id='httpConfig']" --type elem -n Call -v "" $JETTY_HOME/etc/jetty.xml | \
 	/usr/bin/xmlstarlet ed --insert "/Configure/New[@id='httpConfig']/Call" --type attr -n "name" -v "addCustomizer" | \
 	/usr/bin/xmlstarlet ed --subnode "/Configure/New[@id='httpConfig']/Call" --type elem -n "Arg" -v "" | \

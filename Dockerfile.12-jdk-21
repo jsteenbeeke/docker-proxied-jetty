@@ -1,13 +1,3 @@
 FROM registry.jeroensteenbeeke.nl/jetty:latest
 
-USER root
-RUN	apk add --no-cache xmlstarlet && \
-	/usr/bin/xmlstarlet ed --subnode "/Configure/New[@id='httpConfig']" --type elem -n Call -v "" $JETTY_HOME/etc/jetty.xml | \
-	/usr/bin/xmlstarlet ed --insert "/Configure/New[@id='httpConfig']/Call" --type attr -n "name" -v "addCustomizer" | \
-	/usr/bin/xmlstarlet ed --subnode "/Configure/New[@id='httpConfig']/Call" --type elem -n "Arg" -v "" | \
-	/usr/bin/xmlstarlet ed --subnode "/Configure/New[@id='httpConfig']/Call/Arg" --type elem -n "New" -v "" | \
-	/usr/bin/xmlstarlet ed --insert "/Configure/New[@id='httpConfig']/Call/Arg/New" --type attr -n "class" -v "org.eclipse.jetty.server.ForwardedRequestCustomizer" \
-	> $JETTY_HOME/etc/jetty-new.xml && \
-	mv $JETTY_HOME/etc/jetty-new.xml $JETTY_HOME/etc/jetty.xml
-	
-USER jetty
+RUN cd $JETTY_BASE && /usr/bin/java --enable-preview -Djava.io.tmpdir=/tmp/jetty -jar /usr/local/jetty/start.jar --add-modules=http-forwarded

@@ -20,7 +20,7 @@ pipeline {
 		}
 		stage('Build') {
 			steps {
-				sh 'docker build -f Dockerfile.12-jdk-21 -t registry.jeroensteenbeeke.nl/proxied-jetty:12-latest .'
+				sh 'docker build -f Dockerfile.12-jdk-25 -t registry.jeroensteenbeeke.nl/proxied-jetty:12-latest .'
 			} 
 		}
 		stage('Push') {
